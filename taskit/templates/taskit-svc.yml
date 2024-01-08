@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: taskit-svc
+  labels:
+    app: taskit
+spec:
+  type: {{ .Values.taskit.service.type }}
+  ports:
+    - port: {{ .Values.taskit.service.port }}
+      targetPort: {{ .Values.taskit.config.port }}
+  selector:
+    app: taskit

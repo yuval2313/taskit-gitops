@@ -1,0 +1,37 @@
+# App
+taskit:
+  image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/taskit:latest
+  replicaCount: 3
+  config:
+    port: "5000"
+  service:
+    type: LoadBalancer
+    port: "80"
+
+# DB
+postgresql:
+  auth:
+    username: "dbuser"
+    password: "dbpass"
+    database: "taskit"
+  architecture: standalone
+  primary:
+    name: primary
+    resources:
+      limits: {}
+      requests:
+        memory: 256Mi
+        cpu: 250m
+    persistence:
+      enabled: true
+      size: 8Gi
+  ## PostgreSQL Primary service configuration
+  ##
+  service:
+    ## @param primary.service.type Kubernetes Service type
+    ##
+    type: ClusterIP
+    ## @param primary.service.ports.postgresql PostgreSQL service port
+    ##
+    ports:
+      postgresql: 5432

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskit-dpl
+  labels:
+    app: taskit
+spec:
+  replicas: {{ .Values.taskit.replicaCount }}
+  selector:
+    matchLabels:
+      app: taskit
+  template:
+    metadata:
+      labels:
+        app: taskit
+    spec:
+      initContainers:
+        - name: taskit-mgr
+          image: {{ .Values.taskit.image }}
+          args: ["-m", "flask", "db", "upgrade"]
+          ports:
+            - containerPort: {{ .Values.taskit.config.port }}
+          envFrom:
+            - configMapRef:
+                name: taskit-conf
+            - secretRef:
+                name: taskit-secret
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+      containers:
+        - name: taskit
+          image: {{ .Values.taskit.image }}
+          ports:
+            - containerPort: {{ .Values.taskit.config.port }}
+          envFrom:
+            - configMapRef:
+                name: taskit-conf
+            - secretRef:
+                name: taskit-secret
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"

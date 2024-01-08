@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: taskit-conf
+data:
+  DB_HOST: {{ include "taskit.db.host" . }}
+  DB_USER: {{ .Values.postgresql.auth.username }}
+  DB_NAME: {{ .Values.postgresql.auth.database }}
+  DB_PORT: {{ .Values.postgresql.service.ports.postgresql | quote }}
+  PORT: {{ .Values.taskit.config.port | quote }}
