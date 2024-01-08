@@ -1,0 +1,29 @@
+{{- if .Values.taskit.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: taskit-ingress
+{{- if .Values.taskit.ingress.tls.enabled }}
+  annotations:
+    cert-manager.io/issuer: "letsencrypt"
+{{- end }}
+spec:
+  ingressClassName: {{ .Values.taskit.ingress.ingressClassName | default "nginx" }}
+{{- if .Values.taskit.ingress.tls.enabled }}
+  tls:
+    - hosts: 
+        - {{ .Values.taskit.ingress.hostname }}
+      secretName: taskit-tls
+{{- end }}
+  rules:
+    - host: {{ .Values.taskit.ingress.hostname }}
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: taskit-svc
+                port:
+                  number: {{ .Values.taskit.service.port | default "80" }}
+            path: /
+{{- end }}

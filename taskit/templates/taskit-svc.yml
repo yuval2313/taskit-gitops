@@ -5,9 +5,13 @@ metadata:
   labels:
     app: taskit
 spec:
-  type: {{ .Values.taskit.service.type }}
+{{ if .Values.taskit.ingress.enabled }}
+  type: ClusterIP
+{{ else }}
+  type: {{ .Values.taskit.service.type | default "ClusterIP" }}
+{{ end }}
   ports:
-    - port: {{ .Values.taskit.service.port }}
-      targetPort: {{ .Values.taskit.config.port }}
+    - port: {{ .Values.taskit.service.port | default "80"}}
+      targetPort: {{ .Values.taskit.config.port | default "5000"}}
   selector:
     app: taskit

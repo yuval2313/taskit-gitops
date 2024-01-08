@@ -5,8 +5,8 @@ metadata:
   labels:
     app: taskit
 spec:
-  replicas: {{ .Values.taskit.replicaCount }}
-  selector:
+  replicas: {{ .Values.taskit.replicaCount | default 1 }}
+  selector: 
     matchLabels:
       app: taskit
   template:
@@ -19,7 +19,7 @@ spec:
           image: {{ .Values.taskit.image }}
           args: ["-m", "flask", "db", "upgrade"]
           ports:
-            - containerPort: {{ .Values.taskit.config.port }}
+            - containerPort: {{ .Values.taskit.config.port | default 5000 }}
           envFrom:
             - configMapRef:
                 name: taskit-conf
@@ -33,7 +33,7 @@ spec:
         - name: taskit
           image: {{ .Values.taskit.image }}
           ports:
-            - containerPort: {{ .Values.taskit.config.port }}
+            - containerPort: {{ .Values.taskit.config.port | default 5000 }}
           envFrom:
             - configMapRef:
                 name: taskit-conf

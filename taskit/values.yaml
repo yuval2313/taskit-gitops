@@ -5,8 +5,15 @@ taskit:
   config:
     port: "5000"
   service:
-    type: LoadBalancer
+    type: ClusterIP
     port: "80"
+  ingress:
+    # Enables the ingress resource - If true "service.type" is ignored and defaults to "ClusterIP"
+    enabled: true
+    hostname: taskit.in
+    ingressClassName: nginx
+    tls:
+      enabled: true
 
 # DB
 postgresql:
@@ -25,13 +32,7 @@ postgresql:
     persistence:
       enabled: true
       size: 8Gi
-  ## PostgreSQL Primary service configuration
-  ##
   service:
-    ## @param primary.service.type Kubernetes Service type
-    ##
     type: ClusterIP
-    ## @param primary.service.ports.postgresql PostgreSQL service port
-    ##
     ports:
       postgresql: 5432
