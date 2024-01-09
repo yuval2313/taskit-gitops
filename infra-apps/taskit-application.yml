@@ -10,7 +10,7 @@ spec:
   source: # where to find k8s manifests
     repoURL: git@github.com:yuval2313/taskit-gitops.git
     path: taskit # path within repo directory
-    targetRevision: devops
+    targetRevision: HEAD
   destination: # where to deploy
     server: https://kubernetes.default.svc # internal k8s service in default namespace
     namespace: taskit # custom namespace

@@ -15,7 +15,7 @@ spec:
         valueFiles:
           - "$mycharts/values/cert-manager-values.yml"
     - repoURL: git@github.com:yuval2313/taskit-gitops.git
-      targetRevision: devops
+      targetRevision: HEAD
       ref: mycharts
   destination:
     server: https://kubernetes.default.svc
