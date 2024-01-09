@@ -1,0 +1,18 @@
+controller:
+  extraArgs:
+    enable-ssl-passthrough: "true"
+  ingressClassResource:
+    name: nginx
+    enabled: true
+    default: true
+  # -- For backwards compatibility with ingress.class annotation, use ingressClass.
+  # Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation
+  ingressClass: nginx
+  ## Define requests resources to avoid probe issues due to CPU utilization in busy nodes
+  ## ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903
+  ## Ideally, there should be no limits.
+  ## https://engineering.indeedblog.com/blog/2019/12/cpu-throttling-regression-fix/
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
