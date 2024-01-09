@@ -1,0 +1,3 @@
+# See Getting Started: https://cert-manager.io/docs/tutorials/acme/nginx-ingress/
+
+installCRDs: true # Install custom resource definitions required by cert-manager
