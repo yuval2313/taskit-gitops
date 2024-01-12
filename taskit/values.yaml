@@ -1,26 +1,22 @@
-# App
 taskit:
-  image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/taskit:latest
+  image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/taskit:1.0.1
   replicaCount: 3
   config:
-    port: "5000"
+    port: '5000'
   service:
     type: ClusterIP
-    port: "80"
+    port: '80'
   ingress:
-    # Enables the ingress resource - If true "service.type" is ignored and defaults to "ClusterIP"
     enabled: true
     hostname: taskit.in
     ingressClassName: nginx
     tls:
       enabled: true
-
-# DB
 postgresql:
   auth:
-    username: "dbuser"
-    password: "dbpass"
-    database: "taskit"
+    username: dbuser
+    password: dbpass
+    database: taskit
   architecture: standalone
   primary:
     name: primary
