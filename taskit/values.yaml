@@ -15,8 +15,12 @@ taskit:
 postgresql:
   auth:
     username: dbuser
-    password: dbpass
     database: taskit
+    existingSecret: "taskit-secret"
+    secretKeys:
+      userPasswordKey: postgres-user-password
+      adminPasswordKey: postgres-admin-password
+      replicationPasswordKey: postgres-repl-password
   architecture: standalone
   primary:
     name: primary

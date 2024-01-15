@@ -23,8 +23,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: taskit-conf
-            - secretRef:
-                name: taskit-secret
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: taskit-secret
+                  key: postgres-user-password
           resources:
             limits:
               memory: "512Mi"
@@ -37,8 +41,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: taskit-conf
-            - secretRef:
-                name: taskit-secret
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: taskit-secret
+                  key: postgres-user-password
           resources:
             limits:
               memory: "512Mi"
