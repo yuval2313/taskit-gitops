@@ -7,6 +7,7 @@ Automates the deployment of the following components:
 - Task-it Application
 - Ingress-Nginx Controller
 - Cert-Manager
+- Kube-Prometheus Stack
 
 ## Setup
 

@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kps-application
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      targetRevision: 55.8.1
+      chart: kube-prometheus-stack
+      helm:
+        valueFiles:
+          - "$mycharts/values/kps-values.yml"
+    - repoURL: git@github.com:yuval2313/taskit-gitops.git
+      targetRevision: HEAD
+      ref: mycharts
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    automated:
+      selfHeal: true
+      prune: true
