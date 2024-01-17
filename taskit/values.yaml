@@ -1,5 +1,5 @@
 taskit:
-  image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/taskit:1.0.1
+  image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/taskit:1.0.0
   replicaCount: 3
   config:
     port: '5000'
@@ -16,7 +16,7 @@ postgresql:
   auth:
     username: dbuser
     database: taskit
-    existingSecret: "taskit-secret"
+    existingSecret: taskit-secret
     secretKeys:
       userPasswordKey: postgres-user-password
       adminPasswordKey: postgres-admin-password
