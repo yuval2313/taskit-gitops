@@ -1,5 +1,5 @@
 taskit:
-  image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/taskit:1.0.0
+  image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/taskit:1.0.1
   replicaCount: 3
   config:
     port: '5000'
