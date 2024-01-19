@@ -13,6 +13,7 @@ taskit:
     ingressClassName: nginx
     tls:
       enabled: true
+      staging: false
 postgresql:
   auth:
     username: dbuser
