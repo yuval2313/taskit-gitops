@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-kibana-import
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      volumes:
+        - name: kibana-data
+          configMap:
+            name: kibana-data
+            defaultMode: 0777
+      containers:
+        - name: kibana-import
+          image: alpine:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KIBANA_HOST
+              value: {{ .Release.Name }}-kibana
+            - name: KIBANA_PORT
+              value: {{ .Values.elasticsearch.kibana.service.port.http | quote }}
+          command: ["/bin/sh", "-c"]
+          args:
+            - apk add --no-cache curl && /kibana/curl-script.sh
+          volumeMounts:
+            - name: kibana-data
+              mountPath: /kibana/

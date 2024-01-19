@@ -8,3 +8,5 @@ data:
   DB_NAME: {{ .Values.postgresql.auth.database }}
   DB_PORT: {{ .Values.postgresql.service.ports.postgresql | quote }}
   PORT: {{ .Values.taskit.config.port | quote }}
+  LOG_LEVEL: {{ .Values.taskit.config.logLevel | quote }}
+  FLASK_ENV: "production"

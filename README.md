@@ -8,6 +8,7 @@ Automates the deployment of the following components:
 - Ingress-Nginx Controller
 - Cert-Manager
 - Kube-Prometheus Stack
+- Elasticsearch Fluentd Kibana (EFK) Stack
 
 ## Setup
 

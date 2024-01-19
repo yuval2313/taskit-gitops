@@ -1,0 +1,46 @@
+elasticsearch:
+  # Elasticsearch values
+  global:
+    elasticsearch:
+      service:
+        name: elasticsearch
+        ports:
+          restAPI: 9200
+    kibanaEnabled: true
+
+  master:
+    masterOnly: false
+    replicaCount: 1
+  data:
+    replicaCount: 0
+  coordinating:
+    replicaCount: 0
+  ingest:
+    replicaCount: 0
+
+  sysctlImage:
+    ## Enable kernel settings modifier image - not available in GKE Autopilot
+    ## See https://www.elastic.co/guide/en/cloud-on-k8s/master/k8s-virtual-memory.html
+    enabled: true
+
+  kibana:
+    # Kibana values (subchart)
+    ingress:
+      enabled: true
+      hostname: kibana.taskit.in
+      path: /
+      ingressClassName: "nginx"
+    persistence:
+      enabled: true
+      size: 5Gi
+    service:
+      port:
+        http: 5601
+
+fluentd:
+  aggregator:
+    enabled: false
+  forwarder:
+    enabled: true
+    configFile: fluentd.conf
+    configMap: "fluentd-config"

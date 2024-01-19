@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: efk-application
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default # for grouping argocd applications into projects
+  source: # where to find k8s manifests
+    repoURL: git@github.com:yuval2313/taskit-gitops.git
+    path: efk # path within repo directory
+    targetRevision: HEAD
+  destination: # where to deploy
+    server: https://kubernetes.default.svc # internal k8s service in default namespace
+    namespace: efk # custom namespace
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true # automatically creates our custom namespace
+    automated: # most automation features are tunred off by default as a safety mechanism
+      selfHeal: true # when manual changes are applied to the cluster --> automatically sync with source state
+      prune: true # deletion synchronization is disabled by default, this enables it
