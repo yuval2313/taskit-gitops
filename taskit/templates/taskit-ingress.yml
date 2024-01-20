@@ -5,7 +5,7 @@ metadata:
   name: taskit-ingress
 {{- if .Values.taskit.ingress.tls.enabled }}
   annotations:
-    cert-manager.io/issuer: "letsencrypt"
+    cert-manager.io/cluster-issuer: "letsencrypt"
 {{- end }}
 spec:
   ingressClassName: {{ .Values.taskit.ingress.ingressClassName | default "nginx" }}
@@ -13,6 +13,7 @@ spec:
   tls:
     - hosts: 
         - {{ .Values.taskit.ingress.hostname }}
+        - www.{{ .Values.taskit.ingress.hostname }}
       secretName: taskit-tls
 {{- end }}
   rules:

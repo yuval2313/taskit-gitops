@@ -29,6 +29,9 @@ elasticsearch:
       enabled: true
       hostname: kibana.taskit.in
       path: /
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt"
+      tls: true
       ingressClassName: "nginx"
     persistence:
       enabled: true

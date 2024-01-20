@@ -2,10 +2,15 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Release.Name }}-kibana-import
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "5"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
+  backoffLimit: 0
   template:
     spec:
-      restartPolicy: OnFailure
+      restartPolicy: Never
       volumes:
         - name: kibana-data
           configMap:
