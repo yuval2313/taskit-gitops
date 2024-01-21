@@ -1,12 +1,12 @@
 taskit:
-  image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/taskit:1.0.3
+  image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/taskit:1.1.0
   replicaCount: 3
   config:
-    port: "5000"
-    logLevel: "INFO"
+    port: '5000'
+    logLevel: INFO
   service:
     type: ClusterIP
-    port: "80"
+    port: '80'
   ingress:
     enabled: true
     hostname: taskit.in
