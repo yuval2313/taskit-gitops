@@ -3,7 +3,7 @@ taskit:
   replicaCount: 3
   config:
     port: '5000'
-    logLevel: INFO
+    logLevel: DEBUG
   service:
     type: ClusterIP
     port: '80'
