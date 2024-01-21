@@ -27,4 +27,14 @@ spec:
                 port:
                   number: {{ .Values.taskit.service.port | default "80" }}
             path: /
+    - host: www.{{ .Values.taskit.ingress.hostname }}
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: taskit-svc
+                port:
+                  number: {{ .Values.taskit.service.port | default "80" }}
+            path: /
 {{- end }}
