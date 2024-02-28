@@ -1,5 +1,5 @@
 taskit:
-  image: 644435390668.dkr.ecr.eu-central-1.amazonaws.com/taskit:1.1.0
+  image: yuvi202/taskit:latest
   replicaCount: 3
   config:
     port: '5000'
