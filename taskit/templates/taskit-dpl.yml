@@ -30,9 +30,12 @@ spec:
                   name: taskit-secret
                   key: postgres-user-password
           resources:
+            requests:
+              memory: {{ .Values.taskit.resources.requests.memory }}
+              cpu: {{ .Values.taskit.resources.requests.cpu }}
             limits:
-              memory: "512Mi"
-              cpu: "250m"
+              memory: {{ .Values.taskit.resources.limits.memory }}
+              cpu: {{ .Values.taskit.resources.limits.cpu }}
       containers:
         - name: taskit
           image: {{ .Values.taskit.image }}
@@ -48,6 +51,9 @@ spec:
                   name: taskit-secret
                   key: postgres-user-password
           resources:
+            requests:
+              memory: {{ .Values.taskit.resources.requests.memory }}
+              cpu: {{ .Values.taskit.resources.requests.cpu }}
             limits:
-              memory: "512Mi"
-              cpu: "250m"
+              memory: {{ .Values.taskit.resources.limits.memory }}
+              cpu: {{ .Values.taskit.resources.limits.cpu }}

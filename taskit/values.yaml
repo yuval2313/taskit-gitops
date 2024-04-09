@@ -1,12 +1,19 @@
 taskit:
   image: yuvi202/taskit:latest
   replicaCount: 3
+  resources:
+    limits:
+      cpu: 100m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 512Mi
   config:
-    port: '5000'
+    port: "5000"
     logLevel: DEBUG
   service:
     type: ClusterIP
-    port: '80'
+    port: "80"
   ingress:
     enabled: true
     hostname: taskit.in
@@ -14,6 +21,7 @@ taskit:
     tls:
       enabled: true
       staging: false
+
 postgresql:
   auth:
     username: dbuser
